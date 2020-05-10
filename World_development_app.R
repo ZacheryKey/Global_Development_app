@@ -149,7 +149,7 @@ expectancyTotalFinal <- spread(expectancyTotalJoin, year, ExpectancyTotal)
 tradeGDPFinal <- spread(tradeGDPJoin, year, TradeGDP)
 serviceGDPFinal <- spread(serviceGDPJoin, year, ServiceGDP)
 
-# Add a continents column to all of the final dataframes
+# Add a continents column to all of the final dataframes. This will speed up the scatterplot color coding in the future
 literacyMaleFinal$continents <- countrycode(sourcevar = literacyMaleFinal[,which(names(literacyMaleFinal)=="Country")], origin = "country.name",destination = "continent")
 gdpFinal$continents <- countrycode(sourcevar = gdpFinal[,which(names(gdpFinal)=="Country")], origin = "country.name",destination = "continent")
 literacyFemaleFinal$continents <- countrycode(sourcevar = literacyFemaleFinal[,which(names(literacyFemaleFinal)=="Country")], origin = "country.name",destination = "continent")
@@ -621,12 +621,10 @@ ui <- fluidPage(
       wellPanel(style = "background:#BDBDBD",
            wellPanel(
              h4("Welcome!"),
-             #p("Use corresponding option menus for each plot."),
              p("Hover over countries in the world map or points on the scatterplot for more information."),
              p("Click on countries in the world map to display additional information in the 'Selected Country Data' column and in the graphs below the map."),
              p("Brush and double click world map to zoom in. Double click to restore original image.")
            ),
-           #br(),
            wellPanel(  
              h4("Select World Map Options"),
              selectInput("map_factor", "Choose a factor for world map visualization",
@@ -639,8 +637,6 @@ ui <- fluidPage(
              ),
              selectizeInput("year_map", "Choose a year between 1980 and 2018", seq(1980, 2018, 1), selected = 2000)
            ),
-           #br(),
-           #br(),
            wellPanel(
              h4("Selected Country Data"),
              verbatimTextOutput("coordinates"),
@@ -652,10 +648,9 @@ ui <- fluidPage(
     ),
     column(6, align = "center",
           wellPanel(style = "background:#BDBDBD",
-            #h4("World Map Visualization"),
             div(
                 style = "position:relative",
-                plotOutput("myplot",clickOpts(id="on_click"),hover = hoverOpts("plot_hover"),brush = brushOpts(id="zoom_brush",resetOnNew = TRUE),dblclickOpts("plot1_dblclick")),
+                plotOutput("myplot",width = 850,height = 500,clickOpts(id="on_click"),hover = hoverOpts("plot_hover"),brush = brushOpts(id="zoom_brush",resetOnNew = TRUE),dblclickOpts("plot1_dblclick")),
                 uiOutput("hover_info")
             ),
             br(),
@@ -914,12 +909,6 @@ server <- function(input, output) {
     set_options(height = 350,width = 379) %>% 
     layer_points() %>%
     add_legend("fill", title = "Continents") %>%
-      #           properties = legend_props(             # For unknown reason, this code will not work with a tooltip in the plot
-      #             legend = list(
-      #               x = scaled_value("x_rel", 1),
-      #               y = scaled_value("y_rel", 1)
-      #             ))) %>%
-    #layer_smooths() %>% # add trendline to the scatterplot
     add_axis("x",title = scatter_x_reactive_label(),title_offset = 50,properties = axis_props(
       labels = list(angle = 45, align = "left", fontSize = 10)
     )) %>%
@@ -1002,14 +991,7 @@ server <- function(input, output) {
         ,plot.background = element_rect(fill = "#F5F5F5")
         ,plot.title = element_text(size = 15)
         ,plot.subtitle = element_blank()
-        #,axis.text = element_blank()
-        #,axis.title = element_blank()
-        #,axis.ticks = element_blank()
-        #,legend.position = "right"
         ,legend.background = element_rect(fill = "#F5F5F5")
-        #,legend.text = element_text(size = 12)
-        #,legend.key.size = unit(10, "mm")
-        #,legend.title = element_text(size = 15)
       )
   })
   
