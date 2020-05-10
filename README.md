@@ -17,9 +17,9 @@ a.) increase app run speed and data processing efficency
 
     - Remove plotly world map and replace with ggplot with manually added zoom, click and hover capabilities.
     
-      - decrease map drawing runtime speed from >15 seconds to <4 seconds  
+      - decrease map drawing runtime from >15 seconds to <4 seconds  
       
-      - decreases bootup speed from >20 seconds to <10 seconds 
+      - decreases bootup time from >20 seconds to <10 seconds 
       
 b.) provide more information about individual countries development 
 
