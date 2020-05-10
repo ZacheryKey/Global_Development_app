@@ -1074,7 +1074,7 @@ shinyApp(ui, server)
 
 
 
-#### ------------- Prior Code --------- #####
+#### ------------- Prior Code Snippets --------- #####
 
 # # Function using online API to get the ISO3 value
 # ISO3 <- reactive({
@@ -1324,21 +1324,21 @@ shinyApp(ui, server)
 # Selected$Rank = rank(newSelected$Value)
 
 # create a matrix of order for all of the countries for every attribute in a given year 
-valList = list(gdpFinal,tradeGDPFinal,serviceGDPFinal,literacyFemaleFinal,literacyMaleFinal,expectancyFemaleFinal,expectancyMaleFinal,expectancyTotalFinal,mortalityBTSXFinal,mortalityMaleFinal,mortalityFemaleFinal)
-nameValList = list("ISO3","GDP","tradeGDP","serviceGDP","femaleLiteracy","maleLiteracy","femaleLifeExpectancy","maleLifeExpectancy","BTSXlifeExpectancy","BTSXmortality","maleMortality","femaleMortality")
-
-rankDF = data.frame(gdpFinal$ISO3)
-colnames(rankDF)<-c("ISO3")
-
-for(i in 1:length(valList)){
-  year = 2010
-  name = as.character(nameValList[i])
-  DataSource7 = data.frame(valList[i])
-  Selected = data.frame(DataSource7[,as.numeric(which(names(DataSource7)==paste0("X",year)))], DataSource7[,which(names(DataSource7)=="ISO3")])
-  colnames(Selected) <- c("Value","ISO3")
-  Selected$Rank = rank(Selected$Value,na.last = "keep")
-  Selected$Value = NULL
-  rankDF = left_join(rankDF,Selected,by="ISO3")
-}
-
-colnames(rankDF) <- nameValList
+# valList = list(gdpFinal,tradeGDPFinal,serviceGDPFinal,literacyFemaleFinal,literacyMaleFinal,expectancyFemaleFinal,expectancyMaleFinal,expectancyTotalFinal,mortalityBTSXFinal,mortalityMaleFinal,mortalityFemaleFinal)
+# nameValList = list("ISO3","GDP","tradeGDP","serviceGDP","femaleLiteracy","maleLiteracy","femaleLifeExpectancy","maleLifeExpectancy","BTSXlifeExpectancy","BTSXmortality","maleMortality","femaleMortality")
+# 
+# rankDF = data.frame(gdpFinal$ISO3)
+# colnames(rankDF)<-c("ISO3")
+# 
+# for(i in 1:length(valList)){
+#   year = 2010
+#   name = as.character(nameValList[i])
+#   DataSource7 = data.frame(valList[i])
+#   Selected = data.frame(DataSource7[,as.numeric(which(names(DataSource7)==paste0("X",year)))], DataSource7[,which(names(DataSource7)=="ISO3")])
+#   colnames(Selected) <- c("Value","ISO3")
+#   Selected$Rank = rank(Selected$Value,na.last = "keep")
+#   Selected$Value = NULL
+#   rankDF = left_join(rankDF,Selected,by="ISO3")
+# }
+# 
+# colnames(rankDF) <- nameValList
