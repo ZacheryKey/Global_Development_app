@@ -17,11 +17,13 @@ a.) increase app run speed and data processing efficency
     - Remove plotly world map and replace with ggplot with manually added zoom, click and hover capabilities. 
       - decrease map drawing runtime speed from ~10 seconds to less than 3 seconds  
       - decreases bootup speed from ~20 seconds to less than 10 seconds 
+      
 b.) provide more information about individual countries development 
     - Color code scatterplot to categorize continents
     - Add hover over capabilities to scatterplot 
     - Add line plot depicting the differences in a single selected factor over time 
     - Add country rankings for every factor for a given year 
+    
 c.) provide a cleaner user interface
     - make all graph/charts visible on single page without need to scroll
     - clean up design and color coordinate panels
