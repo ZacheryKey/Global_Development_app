@@ -48,4 +48,5 @@ Source of snippets of code used in this app include:
   https://ggvis.rstudio.com/axes-legends.html
   
 (line 785::816) customized tooltip for worldmap: 
+
   https://gitlab.com/snippets/16220
